@@ -1,3 +1,3 @@
-module dc_go_utils
+module github.com/logotipiwe/dc_go_utils
 
 go 1.20
