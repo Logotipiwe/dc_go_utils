@@ -16,7 +16,11 @@ var dcConfig []DcPropertyDto
 var dcConfigMap = make(map[string]string)
 
 func GetConfig(key string) string {
-	return dcConfigMap[key]
+	s, has := dcConfigMap[key]
+	if has {
+		return s
+	}
+	return os.Getenv(key)
 }
 
 func LoadDcConfig() {
