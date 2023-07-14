@@ -44,8 +44,9 @@ func loadDcConfigInternal() error {
 	request, err := http.NewRequest("GET", csUrl+"/api/get-config", nil)
 
 	params := url.Values{}
-	params.Add("service", os.Getenv("SERVICE_NAME"))
-	params.Add("namespace", os.Getenv("NAMESPACE"))
+	params.Add("mToken", GetConfig("M_TOKEN"))
+	params.Add("service", GetConfig("SERVICE_NAME"))
+	params.Add("namespace", GetConfig("NAMESPACE"))
 
 	request.URL.RawQuery = params.Encode()
 
