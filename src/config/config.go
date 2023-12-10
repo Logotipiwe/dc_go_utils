@@ -23,6 +23,18 @@ func GetConfig(key string) string {
 	return os.Getenv(key)
 }
 
+func GetConfigOr(key, defaultVal string) string {
+	s, has := dcConfigMap[key]
+	if has {
+		return s
+	}
+	res, has := os.LookupEnv(key)
+	if has {
+		return res
+	}
+	return defaultVal
+}
+
 func LoadDcConfig() {
 	for i := 0; i < 5; i++ {
 		if i == 4 {
@@ -36,6 +48,7 @@ func LoadDcConfig() {
 		}
 		break
 	}
+	println("Config loaded!")
 }
 
 func loadDcConfigInternal() error {
